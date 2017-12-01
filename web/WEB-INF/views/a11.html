@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>a11</title>
+    <style>
+        #songs-list {
+            border: 1px solid #000;
+            border-collapse: collapse;
+        }
+
+        #songs-list td {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<div class="tracks-table">
+    <table class="table" id="songs-list">
+    </table>
+</div>
+
+<template id="song-tpl">
+    <tr class="mess-hide">
+        <td class="name">
+            <h4>{name}</h4>
+        </td>
+        <td class="song">
+            <h4>{song}</h4>
+        </td>
+        <td class="duration">
+            <h4>{url}</h4>
+        </td>
+    </tr>
+</template>
+<script>
+    let songs = [{
+        url: 'ZZZ http://tegos.kz/new/mp3_full/Redfoo_-_New_Thang.mp3',
+        artist: {
+            name: 'Redfoo ZZZ',
+            song: 'New Thang'
+        }
+    },
+        {
+            url: 'StudentStudent',
+            artist: {
+                name: 'ZZZ',
+                song: 'ZZZ',
+            }
+        },
+        {
+            url: 'http://a.tumblr.com/tumblr_lpoc6cHNDP1r0jthjo1.mp3',
+            artist: {
+                name: 'Hugo',
+                song: '99 Problems'
+            }
+        }
+    ];
+
+    // рендерим все песни в цикле
+    songs.forEach(function (song) {
+        let renderedRow = render('song-tpl', song.artist);
+        document.getElementById('songs-list').appendChild(renderedRow);
+    });
+
+    // рендер темплейта
+    function render(id, data) {
+        let tpl = document.getElementById(id);
+        let tplHtml = tpl.innerHTML;
+        for (let i in data) {
+            let repl = new RegExp('{' + i + '}', 'g');
+            tplHtml = tplHtml.replace(repl, data[i]);
+        }
+        return parseHTML(tplHtml);
+    }
+
+    // создаем dom-элементы из html-строки
+    function parseHTML(html) {
+        let t = document.createElement('template');
+        t.innerHTML = html;
+        return t.content.cloneNode(true);
+    }
+</script>
+</body>
+</html>

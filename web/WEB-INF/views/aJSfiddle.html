@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>aJSfiddle</title>
+</head>
+<body>
+<div>
+    <table id="reservations">
+        <thead>
+        <tr>
+            <th>Res. Number</th>
+            <th>Guest Name</th>
+            <th>Status</th>
+            <th>Arrival Date</th>
+            <th>Departure Date</th>
+            <th>Room Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<script>
+    let reservations = [
+        {
+            "HotelId": "01",
+            "HotelName": "SPA",
+            "ReservNum": "0166977",
+            "Guest Name": "Jonny",
+            "Room": null,
+            "Type": "SUIT",
+            "Rooms": "1",
+            "Board": "BB",
+            "Status": "IH",
+            "Pax": "2,0,0,0",
+            "Arrival": "07/08/12",
+            "Departure": "09/08/12",
+            "AgentDesc": "FIT",
+            "AgentCode": "FIT",
+            "Group": null,
+            "Balance": "0",
+            "Requests": "",
+            "Remarks": null,
+            "Fit/Group": "FIT",
+            "ReturnGuestName": "",
+            "StatusColor": "LightCoral"
+        },
+        {
+            "HotelId": "01",
+            "HotelName": "SPA",
+            "ReservNum": "H000192",
+            "Guest Name": null,
+            "Room": null,
+            "Type": "Folio",
+            "Rooms": "0",
+            "Board": "",
+            "Status": "IH",
+            "Pax": "0,0,0,0",
+            "Arrival": "07/08/12",
+            "Departure": "10/09/12",
+            "AgentDesc": "movies",
+            "AgentCode": "001",
+            "Group": null,
+            "Balance": "0",
+            "Requests": "",
+            "Remarks": "",
+            "Fit/Group": "FIT",
+            "ReturnGuestName": "",
+            "StatusColor": "LightCoral"
+        }
+    ];
+
+    let tbody = $('#reservations tbody'),
+        props = ["ReservNum", "Guest Name", "Status", "Arrival", "Departure", "Type"];
+    $.each(reservations, function (i, reservation) {
+        let tr = $('<tr>');
+        $.each(props, function (i, prop) {
+            $('<td>').html(reservation[prop]).appendTo(tr);
+        });
+        tbody.append(tr);
+    });
+</script>
+</body>
+</html>
