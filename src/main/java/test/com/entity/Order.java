@@ -25,7 +25,7 @@ public class Order {
     @Column(name = "price")
     private double price;
 
-    @Column(name = "date")
+    @Column(name = "order_date")
     private Date orderDate;
 
     @ManyToOne(fetch = FetchType.EAGER)

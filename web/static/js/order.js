@@ -21,15 +21,31 @@ const RestGetAll = function () {
         dataType: 'json',
         async: false,
         success: function (result) {
-            $('#response').html(JSON.stringify(result));
+            // $('#response').html(JSON.stringify(result));
+                $('#example').DataTable({
+                    "data": result,
+                    "columns": [
+                        // {title: "Name"},
+                        // {title: "Position"},
+                        // {title: "Office"},
+                        // {title: "Extn."},
+                        // {title: "Start date"},
+                        // {title: "SalaryZZZZ"}
 
-            // let row = '<table>';
-            // for (let i in result) {
-            //     row += '<td>' + result[i]['id'] + '</td>' + ' ' + '<td>' + result[i]['person']+ '</td>' + ' ' + '<td>' + result[i]['date'] + '</td><br>';
-            //     row += '</table>';
-            //     $('#response').html(row);
-            // }
-
+                        {"data": "id"},
+                        {"data": "person"},
+                        {"data": "product"},
+                        {"data": "orderNumber"},
+                        {"data": "price"},
+                        {"data": "orderDate"},
+                        {"data": "user.accountName"},
+                        {"data": "user.email"},
+                        {"data": "user.firstName"},
+                        {"data": "user.id"},
+                        {"data": "user.lastName"},
+                        {"data": "user.password"}
+                    ]
+                });
         },
         error: function (jqXHR, testStatus, errorThrown) {
             $('#response').html(JSON.stringify(jqXHR))

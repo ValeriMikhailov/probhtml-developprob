@@ -19,7 +19,7 @@
             <td>GET All Orders</td>
             <td><code><strong>GET ALL</strong>/order/all</code></td>
             <td>
-                <button type="button" onclick="RestGetAll()">Try</button>
+                <button type="button" onclick="RestGetAll()">All</button>
             </td>
         </tr>
         <tr>
@@ -36,7 +36,7 @@
                     <button type="button"
                             onclick="RestPut($('#putPerson').val(), $('#putProduct').val(), $('#putOrderNumber').val(), $('#putPrice').val(),
                          $('#putOrderDate').val(), $('#putUser').val())">
-                        Try
+                        Add
                     </button>
                 </form>
             </td>
@@ -56,7 +56,7 @@
                     <button type="button"
                             onclick="RestPost($('#postId').val(),$('#postPerson').val(), $('#postProduct').val(), $('#postOrderNumber').val(),
                          $('#postPrice').val(), $('#postOrderDate').val(), $('#postUser').val())">
-                        Try
+                        Update
                     </button>
                 </form>
             </td>
@@ -66,78 +66,14 @@
             <td><code><strong>DELETE</strong>/order/delete/{id}</code></td>
             <td>
                 Id: <input id="OrderIdForDelete" value=""/>
-                <button type="button" onclick="RestDelete($('#OrderIdForDelete').val())">Try</button>
+                <button type="button" onclick="RestDelete($('#OrderIdForDelete').val())">Delete</button>
             </td>
         </tr>
     </table>
 
-    <div class="panel panel-default">
+    <div class="panel panel-default" id="response">
         <div class="panel-heading">
             <strong>RESPONSE</strong>
         </div>
     </div>
-
-    <div class="tab-container" id="response">
-        <%--<table class="table table-striped">--%>
-            <%--<thead>--%>
-            <%--<tr>--%>
-                <%--<th scope="col">#</th>--%>
-                <%--<th scope="col">ID</th>--%>
-                <%--<th scope="col">PERSON</th>--%>
-                <%--<th scope="col">PRODUCT</th>--%>
-            <%--</tr>--%>
-            <%--</thead>--%>
-            <%--<tbody>--%>
-            <%--<tr>--%>
-                <%--<th scope="row">1</th>--%>
-                <%--<td>{id}</td>--%>
-                <%--<td>{person}</td>--%>
-                <%--<td>{product}</td>--%>
-            <%--</tr>--%>
-            <%--<tr>--%>
-                <%--<th scope="row">2</th>--%>
-                <%--<td>{id}</td>--%>
-                <%--<td>{person}</td>--%>
-                <%--<td>{product}</td>--%>
-            <%--</tr>--%>
-            <%--<tr>--%>
-                <%--<th scope="row">3</th>--%>
-                <%--<td>{id}</td>--%>
-                <%--<td>{person}</td>--%>
-                <%--<td>{product}</td>--%>
-            <%--</tr>--%>
-            <%--</tbody>--%>
-        <%--</table>--%>
-    </div>
-    <%--<table class="table table-striped">--%>
-        <%--<thead>--%>
-        <%--<tr>--%>
-            <%--<th scope="col">#</th>--%>
-            <%--<th scope="col">First Name</th>--%>
-            <%--<th scope="col">Last Name</th>--%>
-            <%--<th scope="col">Username</th>--%>
-        <%--</tr>--%>
-        <%--</thead>--%>
-        <%--<tbody>--%>
-        <%--<tr>--%>
-            <%--<th scope="row">1</th>--%>
-            <%--<td>Mark</td>--%>
-            <%--<td>Otto</td>--%>
-            <%--<td>@mdo</td>--%>
-        <%--</tr>--%>
-        <%--<tr>--%>
-            <%--<th scope="row">2</th>--%>
-            <%--<td>Jacob</td>--%>
-            <%--<td>Thornton</td>--%>
-            <%--<td>@fat</td>--%>
-        <%--</tr>--%>
-        <%--<tr>--%>
-            <%--<th scope="row">3</th>--%>
-            <%--<td>Larry</td>--%>
-            <%--<td>the Bird</td>--%>
-            <%--<td>@twitter</td>--%>
-        <%--</tr>--%>
-        <%--</tbody>--%>
-    <%--</table>--%>
-
 </div>

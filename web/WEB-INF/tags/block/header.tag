@@ -7,7 +7,7 @@
         </div>
         <div id="navbar3" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/WEB-INF/views/main.jsp"><span class="glyphicon glyphicon-home"></span> Главная</a></li>
+                <li><a href="/main.jsp"><span class="glyphicon glyphicon-home"></span> Главная</a></li>
                 <li><a href="/WEB-INF/views/about.jsp"><span class="glyphicon glyphicon-cog"></span> Поддержка</a></li>
                 <li><a href="/WEB-INF/views/about.jsp"><span class="glyphicon glyphicon-phone-alt"></span> Контакты</a></li>
             </ul>
