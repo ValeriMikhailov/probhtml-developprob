@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "name": "Sigit Prasetya N",
+      "gender": "Male",
+      "country": "Indonesia",
+      "phone": "000-857489"
+    },
+    {
+      "name": "Taylor Swift",
+      "gender": "Female",
+      "country": "United State",
+      "phone": "0858774858"
+    },
+    {
+      "name": "Kristen Stewart",
+      "gender": "Female",
+      "country": "British",
+      "phone": "888-985859"
+    }
+  ],
+  "options": [],
+  "files": []
+}

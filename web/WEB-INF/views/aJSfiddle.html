@@ -18,7 +18,7 @@
             <th>Arrival Date</th>
             <th>Departure Date</th>
             <th>Room Type</th>
-            <th>Agent Desc</th> <!-- добавлено vvm + :79 -->
+            <th>Status Color</th> <!-- добавлено vvm + :79 -->
         </tr>
         </thead>
         <tbody>
@@ -76,7 +76,7 @@
     ];
 
     let tbody = $('#reservations tbody'),
-        props = ["ReservNum", "Guest Name", "Status", "Arrival", "Departure", "Type", "AgentDesc"];
+        props = ["ReservNum", "Guest Name", "Status", "Arrival", "Departure", "Type", "StatusColor"];
     $.each(reservations, function (i, reservation) {
         let tr = $('<tr>');
         $.each(props, function (i, prop) {

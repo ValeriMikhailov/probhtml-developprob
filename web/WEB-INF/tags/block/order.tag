@@ -71,7 +71,7 @@
         </tr>
     </table>
 
-    <div class="panel panel-default" id="response">
+    <div class="panel panel-default" id="response" style="font-size: 16px">
         <div class="panel-heading">
             <strong>RESPONSE</strong>
         </div>

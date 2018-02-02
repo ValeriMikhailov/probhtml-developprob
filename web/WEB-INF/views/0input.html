@@ -10,44 +10,270 @@
     <link rel="stylesheet" type="text/css"
           href="https://cdn.datatables.net/select/1.2.4/css/select.dataTables.min.css">
 
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css">
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.0/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
+    <!--<script type="text/javascript" src="../js/bootstrap-notify.min.js"></script>-->
+
+    <!--<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.0/js/dataTables.buttons.min.js"></script>-->
 </head>
 <body>
-<div class="container">
-    <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
-        <thead>
-        <tr>
-            <th></th>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>Position</th>
-            <th>Office</th>
-            <th width="18%">Start date</th>
-            <th>Salary</th>
-        </tr>
-        </tfoot>
-        <tbody></tbody>
-    </table>
+<div class="box">
+    <div class="box-body">
+        <button type="submit" class="btn btn-primary " id="btnadd" name="btnadd"><i class="fa fa-plus"></i> Add Customer
+        </button>
+        <div class="box-body" style="max-width:900px;">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <table id="table_cust" class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr class="tableheader">
+                    <!--<th style="width:40px">#</th>-->
+                    <th style="width:140px">Name</th>
+                    <th style="width:140px">Gender</th>
+                    <th style="width:140px">Country</th>
+                    <th style="width:140px">Phone</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    <div id="modalcust" class="modal">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Form Master Customer</h4>
+                </div>
+                <!--modal header-->
+                <div class="modal-body">
+                    <div class="pad" id="infopanel"></div>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="txtname" placeholder="Name">
+                                <input type="hidden" id="crudmethod" value="N">
+                                <input type="hidden" id="txtid" value="0">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Gender</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="cbogender">
+                                    <option value="Male"> Male</option>
+                                    <option value="Female"> Female</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Country</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="txtcountry">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Phone</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="txtphone">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"></label>
+                            <div class="col-sm-9">
+                                <button type="submit" class="btn btn-primary " id="btnsave"><i class="fa fa-save"></i>
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--modal footer-->
+                </div>
+                <!--modal-content-->
+            </div>
+            <!--modal-dialog modal-lg-->
+        </div>
+        <!--form-kantor-modal-->
+    </div>
 </div>
-
 <script type="text/javascript">
-    let table = $('#example').dataTable({
-        language: {
-            url: "https://cdn.datatables.net/plug-ins/1.10.9/i18n/English.json"
-        },
-        initComplete: function () {
-            var api = this.api();
-            new $.fn.dataTable.Buttons(api, {
-                buttons: [
-                    'copy', 'pdf', 'excel', 'csv'
-                ]
-            });
-            api.buttons().container().appendTo('#buttons');
-        }
+    $(document).ready(function () {
+        $('#table_cust').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": false,
+            "responsive": true,
+            "autoWidth": false,
+            "pageLength": 10,
+            // "ajax": {
+            //     "url": "data.php",
+            //     "type": "POST"
+            // },
+            "ajax": "../json/crud.json",
+            "columns": [
+                // {"data": "urutan"},
+                {"data": "name"},
+                {"data": "gender"},
+                {"data": "country"},
+                {"data": "phone"},
+                {"data": "button"},
+            ]
+        });
     });
+    $(document).on("click", "#btnadd", function () {
+        // $("#modalcust").modal("show");
+        $("#txtname").focus();
+        $("#txtname").val("");
+        $("#txtcountry").val("");
+        $("#txtphone").val("");
+        $("#crudmethod").val("N");
+        $("#txtid").val("0");
+    });
+    $(document).on("click", ".btnhapus", function () {
+        var id_cust = $(this).attr("id_cust");
+        var name = $(this).attr("name_cust");
+        swal({
+                title: "Delete Cust?",
+                text: "Delete Cust : " + name + " ?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Delete",
+                closeOnConfirm: true
+            },
+            function () {
+                var value = {
+                    id_cust: id_cust
+                };
+                $.ajax(
+                    {
+                        url: "delete.php",
+                        type: "POST",
+                        data: value,
+                        success: function (data, textStatus, jqXHR) {
+                            var data = jQuery.parseJSON(data);
+                            if (data.result == 1) {
+                                $.notify('Successfull delete customer');
+                                var table = $('#table_cust').DataTable();
+                                table.ajax.reload(null, false);
+                            } else {
+                                swal("Error", "Can't delete customer data, error : " + data.error, "error");
+                            }
+
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            swal("Error!", textStatus, "error");
+                        }
+                    });
+            });
+    });
+    $(document).on("click", "#btnsave", function () {
+        var id_cust = $("#txtid").val();
+        var name = $("#txtname").val();
+        var gender = $("#cbogender").val();
+        var country = $("#txtcountry").val();
+        var phone = $("#txtphone").val();
+        var crud = $("#crudmethod").val();
+        if (name == '' || name == null) {
+            swal("Warning", "Please fill customer name", "warning");
+            $("#txtname").focus();
+            return;
+        }
+        var value = {
+            id_cust: id_cust,
+            name: name,
+            gender: gender,
+            country: country,
+            phone: phone,
+            crud: crud
+        };
+        $.ajax(
+            {
+                url: "save.php",
+                type: "POST",
+                data: value,
+                success: function (data, textStatus, jqXHR) {
+                    var data = jQuery.parseJSON(data);
+                    if (data.crud == 'N') {
+                        if (data.result == 1) {
+                            $.notify('Successfull save data');
+                            var table = $('#table_cust').DataTable();
+                            table.ajax.reload(null, false);
+                            $("#txtname").focus();
+                            $("#txtname").val("");
+                            $("#txtcountry").val("");
+                            $("#txtphone").val("");
+                            $("#crudmethod").val("N");
+                            $("#txtid").val("0");
+                            $("#txtnama").focus();
+                        } else {
+                            swal("Error", "Can't save customer data, error : " + data.error, "error");
+                        }
+                    } else if (data.crud == 'E') {
+                        if (data.result == 1) {
+                            $.notify('Successfull update data');
+                            var table = $('#table_cust').DataTable();
+                            table.ajax.reload(null, false);
+                            $("#txtname").focus();
+                        } else {
+                            swal("Error", "Can't update customer data, error : " + data.error, "error");
+                        }
+                    } else {
+                        swal("Error", "invalid order", "error");
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    swal("Error!", textStatus, "error");
+                }
+            });
+    });
+    $(document).on("click", ".btnedit", function () {
+        var id_cust = $(this).attr("id_cust");
+        var value = {
+            id_cust: id_cust
+        };
+        $.ajax(
+            {
+                url: "get_cust.php",
+                type: "POST",
+                data: value,
+                success: function (data, textStatus, jqXHR) {
+                    var data = jQuery.parseJSON(data);
+                    $("#crudmethod").val("E");
+                    $("#txtid").val(data.id_cust);
+                    $("#txtname").val(data.name);
+                    $("#cbogender").val(data.gender);
+                    $("#txtcountry").val(data.country);
+                    $("#txtphone").val(data.phone);
+
+                    $("#modalcust").modal('show');
+                    $("#txtname").focus();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    swal("Error!", textStatus, "error");
+                }
+            });
+    });
+    // $.notifyDefaults({
+    //     type: 'success',
+    //     delay: 500
+    // });
 </script>
 </body>
 </html>

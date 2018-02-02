@@ -28,6 +28,7 @@
                 ["Портал UA", "http://pixelcom.at.ua/", "Интернет магазин", "null"],
                 ["htmlhook.ru", "https://htmlhook.ru/", "Блог", "2013-10-15 10:30:00"],
                 ["Новый путь", "http://www.phppath.ru/", "Блог", "2013-09-15 09:20:00"],
+                ["aПортал UA", "http://pixelcom.at.ua/", "Интернет магазин", "2013-10-15 10:30:00"],
                 ["Портал UA", "http://pixelcom.at.ua/", "Интернет магазин", "null"],
                 ["htmlhook.ru", "https://htmlhook.ru/", "Блог", "2013-10-15 10:30:00"],
                 ["Новый путь", "http://www.phppath.ru/", "Блог", "2013-09-15 09:20:00"],
@@ -51,7 +52,8 @@
                     "aTargets": [3]
                     , "sType": "date"
                     , "mRender": function (date, type, full) {
-                        return (full[2] == "Блог")
+                        // return (full[2] == "Блог")
+                        return (full[2] == "Интернет магазин")
                             ? new Date(date).toDateString()
                             : "N/A";
                     }
