@@ -20,7 +20,8 @@ public class AppController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView welcomePage(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/order");
+        modelAndView.setViewName("order");
+//        modelAndView.setViewName("WEB-INF/views/order");
         return modelAndView;
     }
 }
