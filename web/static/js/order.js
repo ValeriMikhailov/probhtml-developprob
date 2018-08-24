@@ -1,19 +1,4 @@
 let service = '/order';
-const RestGet = function (id) {
-    $.ajax({
-        type: 'GET',
-        url: service + '/get/' + id,
-        dataType: 'json',
-        async: false,
-        success: function (result) {
-            $('#response').html(JSON.stringify(result));
-        },
-        error: function (jqXHR, testStatus, errorThrown) {
-            $('#response').html(JSON.stringify(jqXHR))
-        }
-    });
-};
-
 const RestGetAll = function () {
     $.ajax({
         type: 'GET',

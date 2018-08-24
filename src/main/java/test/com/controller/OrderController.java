@@ -1,5 +1,6 @@
 package test.com.controller;
 
+import test.com.entity.JTableJSONResponse;
 import test.com.entity.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,11 +25,23 @@ public class OrderController {
         return orderService.addOrder(order);
     }
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @RequestMapping(value = "/all", method = RequestMethod.POST)
     @ResponseBody
     public List<Order> getOrders(){
         return orderService.getList();
     }
+
+//        @RequestMapping(value = "/all", method = RequestMethod.POST)
+//    @ResponseBody
+//        public JTableJSONResponse<Order> all(){
+//        JTableJSONResponse<Order> jstr = new JTableJSONResponse();
+//        jstr.setResult("OK");
+//        jstr.setRecords();
+//        jstr.setTotalRecordCount();
+//        List<Order> orderList = orderService.getList();
+//        jstr.setRecords(orderList);
+//        return jstr;
+//        }
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
     @ResponseBody
@@ -48,4 +61,3 @@ public class OrderController {
         return orderService.delete(Long.parseLong(inputId));
     }
 }
-

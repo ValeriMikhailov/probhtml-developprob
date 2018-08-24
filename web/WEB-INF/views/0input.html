@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>0input</title>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css"
@@ -42,7 +42,7 @@
                     <th style="width:140px">Gender</th>
                     <th style="width:140px">Country</th>
                     <th style="width:140px">Phone</th>
-                    <th></th>
+                    <th>Save</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -93,11 +93,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label"></label>
+                            <label class="col-sm-3 control-label">Save</label>
                             <div class="col-sm-9">
-                                <button type="submit" class="btn btn-primary " id="btnsave"><i class="fa fa-save"></i>
-                                    Save
-                                </button>
+                                <button type="submit" class="btn btn-primary " id="btnsave"><i class="fa fa-save"></i>Save</button>
                             </div>
                         </div>
                     </div>
@@ -137,7 +135,7 @@
         });
     });
     $(document).on("click", "#btnadd", function () {
-        // $("#modalcust").modal("show");
+        $("#modalcust").modal("show");
         $("#txtname").focus();
         $("#txtname").val("");
         $("#txtcountry").val("");

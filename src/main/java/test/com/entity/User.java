@@ -31,6 +31,17 @@ public class User {
     @Column(name = "PASSWORD")
     private String password;
 
+    @Column(name = "FIRED")
+    private boolean fired;
+
+    public boolean isFired() {
+        return fired;
+    }
+
+    public void setFired(boolean fired) {
+        this.fired = fired;
+    }
+
     public String getAccountName() {
         return accountName;
     }

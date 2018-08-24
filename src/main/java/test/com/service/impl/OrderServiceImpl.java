@@ -13,28 +13,28 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderDao orderDao;
 
-    @Override
+//    @Override
     public Order addOrder(Order order) {
         return orderDao.create(order);
     }
 
-    @Override
+//    @Override
     public Order getById(long id) {
         return orderDao.getById(id);
     }
 
-    @Override
+//    @Override
     public Order delete(long id) {
         Order orderForDelete = orderDao.getById(id);
         return orderDao.delete(orderForDelete);
     }
 
-    @Override
+//    @Override
     public List<Order> getList() {
         return orderDao.getList();
     }
 
-    @Override
+//    @Override
     public Order update(Order order) {
         return orderDao.update(order);
     }

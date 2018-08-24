@@ -16,7 +16,7 @@ public class UserDaoImpl extends BasicDaoImpl<User> implements UserDao {
 		super(User.class);
 	}
 
-	@Override
+//	@Override
 	public User getByAccountName(String accountName) {
 		CriteriaBuilder builder = sessionFactory.getCriteriaBuilder();
 		CriteriaQuery<User> criteriaQuery = builder.createQuery(User.class);
@@ -29,7 +29,7 @@ public class UserDaoImpl extends BasicDaoImpl<User> implements UserDao {
 		return sessionFactory.getCurrentSession().createQuery(criteriaQuery).uniqueResult();
 	}
 
-    @Override
+//    @Override
 	public User getByEmail(String email) {
 		CriteriaBuilder builder = sessionFactory.getCriteriaBuilder();
 		CriteriaQuery<User> criteriaQuery = builder.createQuery(User.class);
@@ -42,7 +42,7 @@ public class UserDaoImpl extends BasicDaoImpl<User> implements UserDao {
 		return sessionFactory.getCurrentSession().createQuery(criteriaQuery).uniqueResult();
 	}
 
-	@Override
+//	@Override
 	public List<User> getByPersonName(String firstName, String lastName) {
 		CriteriaBuilder builder = sessionFactory.getCriteriaBuilder();
 		CriteriaQuery<User> criteriaQuery = builder.createQuery(User.class);

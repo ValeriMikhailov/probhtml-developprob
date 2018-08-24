@@ -5,6 +5,7 @@
     <title>Order</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="/static/css/example.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
 
@@ -17,11 +18,10 @@
 <div class="container">
     <div class="row">
         <block:left/>
-        <block:tableAll/>
         <block:order/>
     </div>
 </div>
-<block:footer/>
+<footer><block:footer/></footer>
 <script type="text/javascript">
     <%@include file="/static/js/order.js"%>
     <%--<%@include file="/static/js/jsProba.js"%>--%>

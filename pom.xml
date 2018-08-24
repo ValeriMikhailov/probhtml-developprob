@@ -3,6 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
           http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>test.com</groupId>
     <artifactId>probhtml-developprob</artifactId>
@@ -16,12 +17,15 @@
         <postgresql.version>9.4.1212</postgresql.version>
         <hibernate.version>5.2.10.Final</hibernate.version>
         <spring.serurity.version>4.2.0.RELEASE</spring.serurity.version>
+        <javax.servlet-api>4.0.0</javax.servlet-api>
+        <javax.servlet.jsp-api>2.3.1</javax.servlet.jsp-api>
+        <jstl.version>1.2</jstl.version>
         <junit.version>4.12</junit.version>
         <jackson.version>2.7.8</jackson.version>
         <log4j.version>1.2.17</log4j.version>
         <junit.version>4.12</junit.version>
         <sl4j-version>1.7.22</sl4j-version>
-        <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
+        <!--<thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>-->
     </properties>
 
     <dependencies>
@@ -76,17 +80,18 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+            <version>${javax.servlet-api}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>javax.servlet.jsp-api</artifactId>
-            <version>2.3.1</version>
+            <version>${javax.servlet.jsp-api}</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-            <version>1.2</version>
+            <version>${jstl.version}</version>
         </dependency>
         <!--Log-->
         <dependency>
@@ -149,12 +154,17 @@
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>${jackson.version}</version>
         </dependency>
-        <!-- Thymeleaf -->
         <dependency>
-            <groupId>org.thymeleaf</groupId>
-            <artifactId>thymeleaf</artifactId>
-            <version>${thymeleaf.version}</version>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.13</version>
         </dependency>
+        <!-- Thymeleaf -->
+        <!--<dependency>-->
+            <!--<groupId>org.thymeleaf</groupId>-->
+            <!--<artifactId>thymeleaf</artifactId>-->
+            <!--<version>${thymeleaf.version}</version>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>
@@ -168,14 +178,14 @@
             </resource>
         </resources>
         <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+                <!--<artifactId>maven-compiler-plugin</artifactId>-->
+                <!--<version>3.3</version>-->
+                <!--<configuration>-->
+                    <!--<source>1.8</source>-->
+                    <!--<target>1.8</target>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.6</version>
@@ -183,7 +193,6 @@
                     <warSourceDirectory>${basedir}/web</warSourceDirectory>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
-
             </plugin>
         </plugins>
     </build>
