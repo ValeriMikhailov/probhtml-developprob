@@ -1,2 +1,2 @@
 # probhtml-developprob
-Education project
+Project for self education
