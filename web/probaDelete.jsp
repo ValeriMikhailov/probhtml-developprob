@@ -8,19 +8,17 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
 
-    <%--<link rel="stylesheet" type="text/css" href="../css/example.css">--%>
+    <link rel="stylesheet" type="text/css" href="/static/css/example.css">
 
     <link rel="stylesheet" type="text/css"
           href="https://cdn.datatables.net/buttons/1.5.0/css/buttons.dataTables.min.css">
     <link rel="stylesheet" type="text/css"
           href="https://cdn.datatables.net/select/1.2.4/css/select.dataTables.min.css">
 
-    <%--<link rel="stylesheet" type="text/css" href="../css/extensions/Editor/css/editor.dataTables.min.css">--%>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <%--<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>--%>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
 
@@ -35,6 +33,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.0/js/buttons.colVis.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.0/js/buttons.flash.min.js"></script>
 
+    <%--<script type="text/javascript" src="static/js/js/jquery-3.3.1.min.js"></script>--%>
 </head>
 <body>
 <block:header/>
@@ -46,23 +45,60 @@
     </div>
 </div>
 <block:footer/>
-</body>
-</html>
+<%--<script type="text/javascript" src="static/js/js/extensions/Editor/js/dataTables.altEdit.js"></script>--%>
+<script type="text/javascript" src="static/js/js/extensions/Editor/js/dataTables.altEditor.free.js"></script>
 <script type="text/javascript">
-    let service = '/order';
-    $(document).ready(function () {
+    /* Formatting function for row details - modify as you need */
+    // function format(d) {
+    //     // `d` is the original data object for the row
+    //     return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+    //         '<tr>' +
+    //         '<td>Full name:</td>' +
+    //         '<td>' + d.user.firstName + '</td>' +
+    //         '</tr>' +
+    //         '<tr>' +
+    //         '<td>Extension number:</td>' +
+    //         '<td>' + d.price + '</td>' +
+    //         '</tr>' +
+    //         '<tr>' +
+    //         '<td>Extra info:</td>' +
+    //         '<td>And any further details here (images etc)...</td>' +
+    //         '</tr>' +
+    //         '</table>';
+    // }
+
+    $(function () {
+        // let columnDefs: [{title: ''},
+        //     {title: 'ID'},
+        //     {title: 'Person'},
+        //     {title: 'Product'},
+        //     {title: 'Order Number'},
+        //     {title: 'Price'},
+        //     {title: 'User Email'},
+        //     {title: 'User FName'},
+        //     {title: 'Edit'},
+        //     {title: 'Delete'}];
         $.ajax({
             type: 'GET',
-            url: service + '/all',
+            url: '/order/all',
             dataType: 'json',
             async: false,
             success: function (result) {
-                $('#example').DataTable({
+                let table = $('#example').DataTable({
                     data: result,
                     jQueryUI: true,
                     deferRender: true,
-                    scrollX: true,
+                    // scrollX: true,
+                    <!-- таблица съезжает под заголовком -->
+                    select: true,
+                    altEditor: true,
                     columns: [
+                        {
+                            className: "details-control",
+                            orderable: false,
+                            data: null,
+                            defaultContent: ""
+                        },
                         {data: "id"},
                         // {data: "person"},
                         {
@@ -81,17 +117,34 @@
                         // {data: "user.id"},
                         // {data: "user.lastName"},
                         // {data: "user.password"},
+                        // {
+                        //     data: null,
+                        //     render: function (ev) {
+                        //         return '<input type="button" class="editRow" value="Edit">';
+                        //         // return '<input type="button" value=' + o.id + '>' + '<a>' + '<span class="glyphicon glyphicon-remove" onclick="RestDelete()" style="color: red"></span>' + '</a>'
+                        //         // return '<button onclick="RestDelete()" value=' + o.id + '>' + '<a>' + '<span class="glyphicon glyphicon-remove" style="color: red"></span>' + '</a>'
+                        //     }
+                        // },
                         {
-                            data: null, render: function (data) {
-                                return '</a>' + '<input type="hidden" value=' + data.id + '>' + '<a>' + '<span class="glyphicon glyphicon-remove" style="color: red"></span>' + '</a>' + '&nbsp;'
-                                + '</a>' + '<input type="hidden" value=' + data.id + '>' + '<a>' + '<span class="glyphicon glyphicon-edit" style="color: blue"></span>' + '</a>'
+                            sortable: false,
+                            // render: function (data, type, full, meta) {
+                            //     let buttonID = "delete_" + full.id;
+                            //     return '<a id=' + buttonID + ' class="btn btn-danger delete" role="button">Delete</a>';
+                            // }
+                            render: function (ev) {
+                                // return '<input type="button" id="deleteRowBtn" value="Delete">'
+                                return '<button type="button"  data-content="remove" class="btn btn-danger" id="deleteRowBtn">Delete</button>'
                             }
                         },
-                        // {
-                        //     data: null, render: function (o) {
-                        //         return '<a href=#/' + o.id + '>' + 'Delete' + '</a>';
-                        //     }
-                        // }
+                        {
+                            data: null,
+                            // render: function (ev) {
+                            //     return '<input type="button" id="editRowBtn" value="Edit"><input type="button" id="saveButton" value="Save">'
+                            // }
+                            render: function () {
+                                return '<input type="button" class="edit" inputmode="altEditor-form" value="Edit">';
+                            }
+                        }
                     ],
 
                     language: {
@@ -118,54 +171,95 @@
                     },
 
                     dom: 'Bfrtip',
-                    buttons: [
+                    buttons: [{
+                        text: 'Add',
+                        name: 'add' // do not change name
+                    },
                         {
-                            extend: 'copyHtml5',
-                            exportOptions: {
-                                orthogonal: 'export',
-                                columns: [0, 1, 3, 4]
-                            }
+                            extend: 'selected', // Bind to Selected row
+                            text: 'Edit',
+                            name: 'edit' // do not change name
                         },
                         {
-                            extend: 'csvHtml5',
-                            // title: 'Data export',
-                            exportOptions: {
-                                orthogonal: 'export',
-                                columns: ':visible'
-                            }
+                            extend: 'selected', // Bind to Selected row
+                            text: 'Delete',
+                            name: 'delete' // do not change name
                         },
                         {
-                            extend: 'excelHtml5',
-                            // title: 'Data export',
-                            exportOptions: {
-                                orthogonal: 'export',
-                                columns: ':visible'
-                            }
-                        },
-                        {
-                            extend: 'pdfHtml5',
-                            download: 'open',
-                            exportOptions: {
-                                columns: [0, 1, 5, 3, 2, 4]
-                            },
-                            orientation: 'landscape',
-                            pageSize: 'LEGAL'
-                        },
-                        {
-                            extend: 'print',
-                            text: 'Print (only selected)',
-                            exportOptions: {
-                                modifier: {
-                                    selected: true
-                                }
-                            }
-                        },
-                        'colvis'
-                    ],
+                            text: 'Refresh',
+                            name: 'refresh'
+                        }
+                    ]
 
-                    select: true
+                    // buttons: [
+                    //     {
+                    //         extend: 'copyHtml5',
+                    //         exportOptions: {
+                    //             orthogonal: 'export',
+                    //             columns: [0, 1, 3, 4]
+                    //         }
+                    //     },
+                    //     {
+                    //         extend: 'csvHtml5',
+                    //         // title: 'Data export',
+                    //         exportOptions: {
+                    //             orthogonal: 'export',
+                    //             columns: ':visible'
+                    //         }
+                    //     },
+                    //     {
+                    //         extend: 'excelHtml5',
+                    //         // title: 'Data export',
+                    //         exportOptions: {
+                    //             orthogonal: 'export',
+                    //             columns: ':visible'
+                    //         }
+                    //     },
+                    //     {
+                    //         extend: 'pdfHtml5',
+                    //         download: 'open',
+                    //         exportOptions: {
+                    //             columns: [0, 1, 5, 3, 2, 4]
+                    //         },
+                    //         orientation: 'landscape',
+                    //         pageSize: 'LEGAL'
+                    //     },
+                    //     {
+                    //         extend: 'print',
+                    //         text: 'Print (only selected)',
+                    //         exportOptions: {
+                    //             modifier: {
+                    //                 selected: true
+                    //             }
+                    //         }
+                    //     },
+                    //     'colvis'
+                    // ],
 
                 });
+
+// ChildRows -> Add event listener for opening and closing details
+                $('#example tbody').on('click', 'td.details-control', function () {
+                    let tr = $(this).closest('tr');
+                    let row = table.row(tr);
+
+                    if (row.child.isShown()) {
+                        // This row is already open - close it
+                        row.child.hide();
+                        tr.removeClass('shown');
+                    }
+                    else {
+                        // Open this row
+                        row.child(format(row.data())).show();
+                        tr.addClass('shown');
+                    }
+                });
+
+// DELETE
+//                 $("#example").on('click', '#deleteRowBtn', function () {
+//                     $(this).parents('tr').remove();
+//                 });
+
             },
             error: function (jqXHR, testStatus, errorThrown) {
                 $('#response').html(JSON.stringify(jqXHR))
@@ -173,27 +267,29 @@
         });
 
         // Do DELETE a Customer via JQUERY AJAX
-        $(document).on("click", "a", function () {
-
-            let customerId = $(this).parent().find('input').val();
-            let workingObject = $(this);
-
-            $.ajax({
-                type: "DELETE",
-                url: service + "/delete/" + customerId,
-                // dataType: "json",
-                // async: false,
-                success: function () {
-                    workingObject.closest("tr").remove();
-                },
-                // error: function (e) {
-                //     alert("ERROR: ", e);
-                //     console.log("ERROR: ", e);
-                // }
-                error: function (jqXHR, testStatus, errorThrown) {
-                    $('#resultMsgDiv').html(JSON.stringify(jqXHR))
-                }
-            });
-        });
+        // $(document).on("click", "#deleteRowBtn", function () {
+        //
+        //     let customerId = $(this).parent().find('input').val();
+        //     let workingObject = $(this);
+        //
+        //     $.ajax({
+        //         type: "DELETE",
+        //         url: "/order/delete/" + customerId,
+        //         dataType: "json",
+        //         async: false,
+        //         success: function () {
+        //             workingObject.closest("tr").remove();
+        //         },
+        //         // error: function (e) {
+        //         //     alert("ERROR: ", e);
+        //         //     console.log("ERROR: ", e);
+        //         // }
+        //         error: function (jqXHR, testStatus, errorThrown) {
+        //             $('#resultMsgDiv').html(JSON.stringify(jqXHR))
+        //         }
+        //     });
+        // });
     });
 </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>a01</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+</head>
+<body>
+<table id="example" class="display responsive nowrap" style="width:100%">
+    <thead>
+    <tr>
+        <th class="site_name">Название</th>
+        <th>Адрес</th>
+        <th>Тип</th>
+        <th>Последние изменения</th>
+        <th>5555</th>
+    </tr>
+    </thead>
+</table>
+<script>
+
+    $("#example").dataTable({
+
+        // "iTotalRecords": 50,
+        // "iTotalDisplayRecords": 10,
+        // "sEcho": 10,
+        // "aaData": [
+        //     {
+        //         "name": "htmlhook.ru",
+        //         "url": "https://htmlhook.ru/",
+        //         "editor": {"name": "Блог", "phone": ["7", "август"], "email": ["sup.blablabla@domain.com"]}
+        //     },
+        //     {
+        //         "name": "Новый путь",
+        //         "url": "http://www.phppath.ru/",
+        //         "editor": {"name": "Блог", "phone": ["14", "сетябрь"], "email": ["blablabla@domain.com"]}
+        //     },
+        //     {
+        //         "name": "Портал.ua",
+        //         "url": "http://pixelcom.at.ua/",
+        //         "editor": {"name": "Магазин", "phone": ["28", "октябрь"], "email": ["blablabla.admin@domain.com"]}
+        //     }
+        // ],
+
+        "ServerSide": true,
+        "sAjaxSource": "../json/data_source.json",
+        "aoColumns": [{
+            "mData": "name",
+            "sTitle": "Название сайта"
+        }, {
+            "mData": "url",
+            "mRender": function (url, type, full) {
+                return '<a href="' + url + '">' + url + '</a>';
+            }
+        }, {
+            "mData": "editor.name"
+        }, {
+            "mData": "editor.phone"
+        }, {
+            "mData": "editor",
+            "mRender": function (data) {
+                return data.email.join("<br>");
+            }
+        }]
+    });
+</script>
+</body>
+</html>

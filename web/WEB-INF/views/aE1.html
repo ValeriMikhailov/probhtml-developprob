@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>aE1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!--<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>-->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+
+    <style>
+        td.highlight {
+            background-color: whitesmoke !important;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <table id="example" class="display" width="100%" cellspacing="0">
+        <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <th>1</th>
+            <th>2</th>
+            <th>FFF</th>
+            <th>4</th>
+            <th>5</th>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+</body>
+</html>
+<script>     //  Individual column searching (text inputs)
+$(document).ready(function () {
+    // Setup - add a text input to each footer cell
+    $('#example tfoot th').each(function () {
+        let title = $(this).text();
+        $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+    });
+
+    // DataTable
+    let table = $('#example').DataTable({
+        "ServerSide": true,                             //  <-- не понятно - работает ли ???
+        "sAjaxSource": "../json/data_source.json",
+        "aoColumns": [{
+            "mData": "name",
+            "sTitle": "Название сайта"
+        }, {
+            "mData": "url",
+            "mRender": function (url, type, full) {
+                return '<a href="' + url + '">' + url + '</a>';
+            }
+        }, {
+            "mData": "editor.name"
+        }, {
+            "mData": "editor.phone"
+        }, {
+            "mData": "editor",
+            "mRender": function (data) {
+                return data.email.join("<br>");
+            }
+        }],
+    });
+
+    // Apply the search
+    table.columns().every(function () {
+        let that = this;
+
+        $('input', this.footer()).on('keyup change', function () {
+            if (that.search() !== this.value) {
+                that
+                    .search(this.value)
+                    .draw();
+            }
+        });
+    });
+
+    $('#example tbody')                                //  <-- + <style> только со стайлом !!!
+        .on('mouseenter', 'td', function () {
+            let colIdx = table.cell(this).index().column;
+
+            $(table.cells().nodes()).removeClass('highlight');
+            $(table.column(colIdx).nodes()).addClass('highlight');
+        });
+});
+</script>

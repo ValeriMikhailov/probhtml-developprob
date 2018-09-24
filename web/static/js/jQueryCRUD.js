@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function () {
     let columnDefs = [
         {
             title: "Person",
@@ -21,13 +21,13 @@ $(document).ready(function () {
             }
         }];
     $.ajax({
+        type: 'GET',
         url: 'order/all',
         async: false,
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
         callback: 'callback',
         crossDomain: true,
-        contentType: 'application/json; charset=utf-8',
-        type: 'POST',
-        dataType: 'json',
         success: function (result) {
             let myTable = $('#customerTable').DataTable({
                 data: result,

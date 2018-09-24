@@ -9,7 +9,7 @@
             <li><a href="/jQueryCRUD.jsp">jQuery CRUD</a></li>
             <li><a href="/probaDelete.jsp">Proba Delete</a></li>
             <li><a href="/jTable.jsp">jTable JSP</a></li>
-            <li><a href="/jTableDark.jsp">jTable Dark JSP</a></li>
+            <li><a href="/jTableDark">jTable Dark JSP</a></li>
             <li><a href="/WEB-INF/views/about.jsp">Поддержка</a></li>
             <li><a href="/WEB-INF/views/about.jsp">Контакты</a></li>
         </ul>
